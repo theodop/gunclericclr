@@ -1,9 +1,9 @@
 using System;
 using System.Drawing;
-using GunCleric.Game;
+using GunCleric.Controllers;
 using GunCleric.Rendering;
 
-namespace GunCleric.Controllers
+namespace GunCleric.Game
 {
     public class GameController
     {
@@ -36,7 +36,8 @@ namespace GunCleric.Controllers
 
                 var key = Console.ReadKey();
 
-                if (key.Key == ConsoleKey.W) {
+                if (key.Key == ConsoleKey.W)
+                {
                     gameState.PlayerPosition = new Point(gameState.PlayerPosition.X, gameState.PlayerPosition.Y - 1);
                 }
             }

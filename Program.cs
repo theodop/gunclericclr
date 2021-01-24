@@ -1,5 +1,6 @@
 ﻿using System;
-using GunCleric.Controllers;
+using GunCleric.Game;
+using GunCleric.Rendering;
 
 namespace GunCleric
 {

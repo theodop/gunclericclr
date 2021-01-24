@@ -1,1 +1,3 @@
-- Knock off DRL screen
+- Add atom class and move player across to it
+- Move input into input controller
+- Pull out name as properties
