@@ -28,9 +28,9 @@ namespace GunCleric.Rendering
                 for (int i = 0; i < viewport.Area.Height; i++)
                 {
                     var newLine = GenerateLine(viewport.Area.Width);
-                    if (i == gameState.PlayerPosition.Y)
+                    if (i == gameState.Player.Position.Y)
                     {
-                        newLine[gameState.PlayerPosition.X] = '@';
+                        newLine[gameState.Player.Position.X] = '@';
                     }
 
                     InjectIntoImage(newImage, newLine, viewport.Area.X, viewport.Area.Y + i);

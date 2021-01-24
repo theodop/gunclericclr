@@ -1,4 +1,5 @@
 using System.Drawing;
+using GunCleric.Atoms;
 using GunCleric.Rendering;
 
 namespace GunCleric.Game
@@ -12,7 +13,7 @@ namespace GunCleric.Game
         public string Weapon = "Sick pistol";
         public Screen CurrentScreen;
 
-        public Point PlayerPosition = new Point(5, 5);
+        public Atom Player;
 
         public Rectangle WindowSize = new Rectangle(0, 0, 80, 25);
 

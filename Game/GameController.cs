@@ -1,6 +1,6 @@
 using System;
 using System.Drawing;
-using GunCleric.Controllers;
+using GunCleric.Player;
 using GunCleric.Rendering;
 
 namespace GunCleric.Game
@@ -22,6 +22,8 @@ namespace GunCleric.Game
 
             gameState.CurrentScreen = mainScreen;
 
+            gameState.Player = PlayerFactory.CreatePlayer("Player", new Geometry.GamePosition(5, 5, 1));
+
             _renderController.Initialise(gameState);
 
             Loop(gameState);
@@ -38,7 +40,7 @@ namespace GunCleric.Game
 
                 if (key.Key == ConsoleKey.W)
                 {
-                    gameState.PlayerPosition = new Point(gameState.PlayerPosition.X, gameState.PlayerPosition.Y - 1);
+                    //gameState.PlayerPosition = new Point(gameState.PlayerPosition.X, gameState.PlayerPosition.Y - 1);
                 }
             }
         }
