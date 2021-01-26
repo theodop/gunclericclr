@@ -1,2 +1,2 @@
-- Pull out name as properties
+- Serialise and deserialise
 - Move player movement into component

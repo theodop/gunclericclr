@@ -21,11 +21,11 @@ namespace GunCleric.Game
         {
             var gameState = new GameState();
 
+            gameState.Player = PlayerFactory.CreatePlayer("Bungus", new Geometry.GamePosition(5, 5, 1));
+
             var mainScreen = ScreenFactory.GetMainScreen(gameState);
 
             gameState.CurrentScreen = mainScreen;
-
-            gameState.Player = PlayerFactory.CreatePlayer("Player", new Geometry.GamePosition(5, 5, 1));
 
             _renderController.Initialise(gameState);
 

@@ -1,3 +1,4 @@
+using GunCleric.Atoms;
 using GunCleric.Game;
 using GunCleric.Screens;
 
@@ -7,9 +8,10 @@ namespace GunCleric.Rendering
     {
         public static Screen GetMainScreen(GameState gameState)
         {
+            var player = gameState.Player;
             var displayFields = new []
             {
-                new DisplayField(2, 22, () => gameState.PlayerName),
+                new DisplayField(2, 22, () => player.GetComponent<UniqueAtomComponent>().Name),
                 new DisplayField(2, 23, () => $"Health: {gameState.Hp}%"),
                 new DisplayField(15, 23, () => $"Exp: {gameState.Xp}"),
                 new DisplayField(29, 22, () => $"Armour: {gameState.Armour}"),

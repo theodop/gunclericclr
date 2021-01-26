@@ -10,6 +10,8 @@ namespace GunCleric.Player
             var player = new Atom("Player", '@', position);
             var inputActionController = new PlayerInputActionController(player);
             player.AddComponent(inputActionController);
+            var uniqueComponent = new UniqueAtomComponent(player, name);
+            player.AddComponent(uniqueComponent);
             return player;
         }
     }
