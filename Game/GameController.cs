@@ -1,5 +1,6 @@
 using System;
 using System.Drawing;
+using GunCleric.Input;
 using GunCleric.Player;
 using GunCleric.Rendering;
 
@@ -8,10 +9,12 @@ namespace GunCleric.Game
     public class GameController
     {
         private readonly RenderController _renderController;
+        private readonly InputController _inputController;
 
-        public GameController(RenderController renderController)
+        public GameController(RenderController renderController, InputController inputController)
         {
             _renderController = renderController;
+            _inputController = inputController;
         }
 
         public void Start()
@@ -33,15 +36,8 @@ namespace GunCleric.Game
         {
             while (true)
             {
-                Update(gameState);
                 Render(gameState);
-
-                var key = Console.ReadKey();
-
-                if (key.Key == ConsoleKey.W)
-                {
-                    //gameState.PlayerPosition = new Point(gameState.PlayerPosition.X, gameState.PlayerPosition.Y - 1);
-                }
+                Update(gameState);
             }
         }
 
@@ -52,6 +48,10 @@ namespace GunCleric.Game
 
         private void Update(GameState gameState)
         {
+            var input = _inputController.GetConsoleInput();
+            var action = _inputController.GetActionFromInput(input);
+
+            gameState.CurrentScreen.ScreenActionController.ReactToAction(action, gameState);
         }
     }
 }

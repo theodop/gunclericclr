@@ -1,3 +1,2 @@
-- Add atom class and move player across to it
-- Move input into input controller
 - Pull out name as properties
+- Move player movement into component

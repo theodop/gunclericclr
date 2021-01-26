@@ -1,5 +1,6 @@
 ﻿using System;
 using GunCleric.Game;
+using GunCleric.Input;
 using GunCleric.Rendering;
 
 namespace GunCleric
@@ -9,7 +10,8 @@ namespace GunCleric
         static void Main(string[] args)
         {
             var gameController = new GameController(
-                new RenderController()
+                new RenderController(),
+                new InputController()
             );
 
             gameController.Start();

@@ -87,7 +87,7 @@ namespace GunCleric.Rendering
                 //}
             }
 
-            Console.SetCursorPosition(0, newImage.GetLength(0));
+            Console.SetCursorPosition(0, 0);
         }
     }
 }

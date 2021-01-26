@@ -1,4 +1,5 @@
 using GunCleric.Game;
+using GunCleric.Screens;
 
 namespace GunCleric.Rendering
 {
@@ -20,7 +21,7 @@ namespace GunCleric.Rendering
                 new Viewport(new System.Drawing.Rectangle(1, 3, 78, 17))
             };
 
-            var mainScreen = new Screen(displayFields, viewports);
+            var mainScreen = new Screen(displayFields, viewports, new MainScreenInputActionController());
             return mainScreen;
         }
     }

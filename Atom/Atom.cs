@@ -10,7 +10,7 @@ namespace GunCleric.Atoms
 
         public string Type { get; }
         public char Tile { get; }
-        public GamePosition Position { get; }
+        public GamePosition Position { get; set; }
 
         public Atom(string type, char tile, GamePosition position)
         {
