@@ -2,20 +2,23 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace GunCleric.Atoms
 {
+    [DataContract]
     public class UniqueAtomComponent : IAtomComponent
     {
-        public Atom MyAtom { get; }
+        public Atom Atom { get; set; }
 
-        public string Name { get; }
+        [DataMember]
+        public string Name;
 
         public UniqueAtomComponent(Atom atom, string name)
         {
-            MyAtom = atom;
+            Atom = atom;
             Name = name;
         }
 

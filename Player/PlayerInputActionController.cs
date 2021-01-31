@@ -12,18 +12,18 @@ namespace GunCleric.Player
 {
     public class PlayerInputActionController : IInputActionController
     {
+        public Atom Atom { get; set; }
+
         public PlayerInputActionController(Atom atom)
         {
-            MyAtom = atom;
+            Atom = atom;
         }
-
-        public Atom MyAtom { get; }
 
         public Type GetComponentInterface() => typeof(IInputActionController);
 
         public void ReactToAction(InputAction action, GameState gameState)
         {
-            var player = MyAtom;
+            var player = Atom;
 
             (var x, var y) = action switch
             {

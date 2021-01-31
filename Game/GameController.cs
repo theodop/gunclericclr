@@ -3,6 +3,7 @@ using System.Drawing;
 using GunCleric.Input;
 using GunCleric.Player;
 using GunCleric.Rendering;
+using GunCleric.Saving;
 
 namespace GunCleric.Game
 {
@@ -10,11 +11,15 @@ namespace GunCleric.Game
     {
         private readonly RenderController _renderController;
         private readonly InputController _inputController;
+        private readonly SaveController _saveController;
 
-        public GameController(RenderController renderController, InputController inputController)
+        public GameController(RenderController renderController, 
+            InputController inputController,
+            SaveController saveController)
         {
             _renderController = renderController;
             _inputController = inputController;
+            _saveController = saveController;
         }
 
         public void Start()
@@ -38,6 +43,7 @@ namespace GunCleric.Game
             {
                 Render(gameState);
                 Update(gameState);
+                _saveController.Save(gameState);
             }
         }
 

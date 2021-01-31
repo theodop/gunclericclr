@@ -2,6 +2,7 @@
 using GunCleric.Game;
 using GunCleric.Input;
 using GunCleric.Rendering;
+using GunCleric.Saving;
 
 namespace GunCleric
 {
@@ -11,7 +12,8 @@ namespace GunCleric
         {
             var gameController = new GameController(
                 new RenderController(),
-                new InputController()
+                new InputController(),
+                new SaveController()
             );
 
             gameController.Start();

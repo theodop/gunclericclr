@@ -1,16 +1,24 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using GunCleric.Geometry;
+using GunCleric.Player;
 
 namespace GunCleric.Atoms
 {
+    [DataContract]
+    [KnownType(typeof(UniqueAtomComponent))]
+    [KnownType(typeof(PlayerInputActionController))]
     public class Atom
     {
-        private IDictionary<Type, IAtomComponent> _components = new Dictionary<Type, IAtomComponent>();
-
-        public string Type { get; }
-        public char Tile { get; }
-        public GamePosition Position { get; set; }
+        [DataMember]
+        public IDictionary<Type, IAtomComponent> Components = new Dictionary<Type, IAtomComponent>();
+        [DataMember]
+        public string Type;
+        [DataMember]
+        public char Tile;
+        [DataMember]
+        public GamePosition Position;
 
         public Atom(string type, char tile, GamePosition position)
         {
@@ -22,9 +30,9 @@ namespace GunCleric.Atoms
         public void AddComponent(IAtomComponent component)
         {
             var type = component.GetComponentInterface();
-            if (!_components.ContainsKey(type))
+            if (!Components.ContainsKey(type))
             {
-                _components[type] = component;
+                Components[type] = component;
             }
             else
             {
@@ -34,12 +42,12 @@ namespace GunCleric.Atoms
 
         public bool HasComponent<T>() where T : IAtomComponent
         {
-            return _components.ContainsKey(typeof(T));
+            return Components.ContainsKey(typeof(T));
         }
 
         public T GetComponent<T>() where T : IAtomComponent
         {
-            return (T)_components[typeof(T)];
+            return (T)Components[typeof(T)];
         }
     }
 }

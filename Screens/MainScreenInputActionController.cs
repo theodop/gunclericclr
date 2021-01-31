@@ -11,12 +11,9 @@ namespace GunCleric.Screens
 {
     public class MainScreenInputActionController : IInputActionController
     {
-        public Atom MyAtom => throw new NotImplementedException();
+        public Atom Atom { get; set; }
 
-        public Type GetComponentInterface()
-        {
-            throw new NotImplementedException();
-        }
+        public Type GetComponentInterface() => throw new NotImplementedException();
 
         public void ReactToAction(InputAction action, GameState gameState)
         {
