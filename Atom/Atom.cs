@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using GunCleric.Game;
 using GunCleric.Geometry;
 using GunCleric.Player;
 
@@ -48,6 +49,30 @@ namespace GunCleric.Atoms
         public T GetComponent<T>() where T : IAtomComponent
         {
             return (T)Components[typeof(T)];
+        }
+
+        public void MoveAtom(GamePosition newPosition, GameState state)
+        {
+            var oldPosition = Position;
+            try
+            {
+                var level = state.Levels[oldPosition.Level];
+
+                var newLevel = state.Levels[newPosition.Level];
+
+                if (level != newLevel)
+                {
+                    throw new NotImplementedException();
+                }
+
+                Position = newPosition;
+
+                level.UpdateLevelElement(oldPosition, this);
+            }
+            catch (Exception)
+            {
+                Position = oldPosition;
+            }
         }
     }
 }

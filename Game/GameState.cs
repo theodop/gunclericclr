@@ -1,8 +1,10 @@
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Runtime.Serialization;
 using GunCleric.Atoms;
 using GunCleric.Rendering;
+using GunCleric.Levels;
 
 namespace GunCleric.Game
 {
@@ -28,6 +30,10 @@ namespace GunCleric.Game
 
         [DataMember]
         public Rectangle WindowSize = new Rectangle(0, 0, 80, 25);
+
+        public IDictionary<int, Level> Levels = new Dictionary<int, Level>();
+
+        public Level CurrentLevel;
 
         public char[,] LastImage;
     }

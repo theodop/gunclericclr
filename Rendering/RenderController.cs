@@ -28,9 +28,24 @@ namespace GunCleric.Rendering
                 for (int i = 0; i < viewport.Area.Height; i++)
                 {
                     var newLine = GenerateLine(viewport.Area.Width);
-                    if (i == gameState.Player.Position.Y)
+                    
+                    for (int j = 0; j < viewport.Area.Width; j++)
                     {
-                        newLine[gameState.Player.Position.X] = '@';
+                        char? thisChar = null;
+
+                        if (gameState.CurrentLevel.LevelElements.ContainsKey((j, i, Levels.Layer.Floor)))
+                        {
+                            thisChar = gameState.CurrentLevel.LevelElements[(j, i, Levels.Layer.Floor)].Tile;
+                        }
+                        if (gameState.CurrentLevel.LevelElements.ContainsKey((j, i, Levels.Layer.Blocking)))
+                        {
+                            thisChar = gameState.CurrentLevel.LevelElements[(j, i, Levels.Layer.Blocking)].Tile;
+                        }
+
+                        if (thisChar != null)
+                        {
+                            newLine[j] = thisChar.Value;
+                        }
                     }
 
                     InjectIntoImage(newImage, newLine, viewport.Area.X, viewport.Area.Y + i);

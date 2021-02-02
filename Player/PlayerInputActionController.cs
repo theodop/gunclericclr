@@ -2,6 +2,7 @@
 using GunCleric.Game;
 using GunCleric.Geometry;
 using GunCleric.Input;
+using GunCleric.Levels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,7 +39,9 @@ namespace GunCleric.Player
                 _                           => (player.Position.X, player.Position.Y)
             };
 
-            player.Position = new GamePosition(x, y, player.Position.Level);
+            var newPosition = new GamePosition(x, y, player.Position.Level, player.Position.Layer);
+
+            player.MoveAtom(newPosition, gameState);
         }
     }
 }
