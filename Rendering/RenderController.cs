@@ -33,13 +33,9 @@ namespace GunCleric.Rendering
                     {
                         char? thisChar = null;
 
-                        if (gameState.CurrentLevel.LevelElements.ContainsKey((j, i, Levels.Layer.Floor)))
+                        foreach (var atom in gameState.CurrentLevel.GetAtoms(j, i))
                         {
-                            thisChar = gameState.CurrentLevel.LevelElements[(j, i, Levels.Layer.Floor)].Tile;
-                        }
-                        if (gameState.CurrentLevel.LevelElements.ContainsKey((j, i, Levels.Layer.Blocking)))
-                        {
-                            thisChar = gameState.CurrentLevel.LevelElements[(j, i, Levels.Layer.Blocking)].Tile;
+                            thisChar = atom.Tile;
                         }
 
                         if (thisChar != null)
