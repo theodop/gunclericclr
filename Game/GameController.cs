@@ -1,6 +1,8 @@
 using System;
 using System.Drawing;
+using GunCleric.Geometry;
 using GunCleric.Input;
+using GunCleric.Items;
 using GunCleric.Levels;
 using GunCleric.Player;
 using GunCleric.Rendering;
@@ -27,10 +29,16 @@ namespace GunCleric.Game
         {
             var gameState = new GameState();
 
-            gameState.Player = PlayerFactory.CreatePlayer("Bungus", new Geometry.GamePosition(5, 5, 1, Levels.Layer.Blocking));
+            gameState.Player = PlayerFactory.CreatePlayer("Bungus", new GamePosition(5, 5, 1, Layer.Blocking));
 
             var level = LevelFactory.GenerateLevel(1);
             level.AddLevelElement(gameState.Player);
+
+            var testItem1 = ItemFactory.CreateItem("katana", new GamePosition(7, 7, 1, Layer.OnFloor));
+            var testItem2 = ItemFactory.CreateItem("katana", new GamePosition(4, 9, 1, Layer.OnFloor));
+
+            level.AddLevelElement(testItem1, Level.AddStyle.Stack);
+            level.AddLevelElement(testItem2, Level.AddStyle.Stack);
 
             gameState.Levels[1] = level;
             gameState.CurrentLevel = level;

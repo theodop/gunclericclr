@@ -1,2 +1,6 @@
+- Allow player to pick up
+- Inventory screen
+- Equipping
+- Allow player to drop
 - Serialise and deserialise
 - Move player movement into component
