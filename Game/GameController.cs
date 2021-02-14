@@ -15,21 +15,24 @@ namespace GunCleric.Game
         private readonly RenderController _renderController;
         private readonly InputController _inputController;
         private readonly SaveController _saveController;
+        private readonly LevelController _levelController;
 
         public GameController(RenderController renderController, 
             InputController inputController,
-            SaveController saveController)
+            SaveController saveController,
+            LevelController levelController)
         {
             _renderController = renderController;
             _inputController = inputController;
             _saveController = saveController;
+            _levelController = levelController;
         }
 
         public void Start()
         {
             var gameState = new GameState();
 
-            gameState.Player = PlayerFactory.CreatePlayer("Bungus", new GamePosition(5, 5, 1, Layer.Blocking));
+            gameState.Player = PlayerFactory.CreatePlayer("Bungus", new GamePosition(5, 5, 1, Layer.Blocking), _levelController);
 
             var level = LevelFactory.GenerateLevel(1);
             level.AddLevelElement(gameState.Player);

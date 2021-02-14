@@ -17,5 +17,7 @@ namespace GunCleric.Input
         MoveDownLeft,
         MoveLeft,
         MoveUpLeft,
+        PickUp,
+        PutDown,
     }
 }

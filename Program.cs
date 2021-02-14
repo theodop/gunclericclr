@@ -1,6 +1,7 @@
 ﻿using System;
 using GunCleric.Game;
 using GunCleric.Input;
+using GunCleric.Levels;
 using GunCleric.Rendering;
 using GunCleric.Saving;
 
@@ -13,7 +14,8 @@ namespace GunCleric
             var gameController = new GameController(
                 new RenderController(),
                 new InputController(),
-                new SaveController()
+                new SaveController(),
+                new LevelController()
             );
 
             gameController.Start();

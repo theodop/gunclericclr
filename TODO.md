@@ -1,4 +1,5 @@
 - Allow player to pick up
+- Make factories non-static
 - Inventory screen
 - Equipping
 - Allow player to drop

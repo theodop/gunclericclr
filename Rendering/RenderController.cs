@@ -91,11 +91,11 @@ namespace GunCleric.Rendering
                 var newRow = newImage.GetRow(i);
                 var oldRow = lastImage.GetRow(i);
 
-                //if (newRow != oldRow)
-                //{
-                Console.SetCursorPosition(0, i);
-                Console.WriteLine(newRow);
-                //}
+                if (newRow != oldRow)
+                {
+                    Console.SetCursorPosition(0, i);
+                    Console.WriteLine(newRow);
+                }
             }
 
             Console.SetCursorPosition(0, 0);

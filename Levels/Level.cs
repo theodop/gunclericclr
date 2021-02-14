@@ -29,6 +29,7 @@ namespace GunCleric.Levels
             }
         }
 
+
         class LevelSlotMulti : LevelSlot
         {
             LinkedList<Atom> _atoms;
@@ -157,6 +158,9 @@ namespace GunCleric.Levels
             }
             return new Atom[] { };
         }
+
+        internal IEnumerable<Atom> GetAtoms(GamePosition position) 
+            => GetAtoms(position.X, position.Y, position.Layer);
 
         internal IEnumerable<Atom> GetAtoms(int x, int y)
         {
