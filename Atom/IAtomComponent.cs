@@ -4,7 +4,7 @@ namespace GunCleric.Atoms
 {
     public interface IAtomComponent
     {
-        Atom Atom { get; set; }
+        Atom Atom { get; }
         Type GetComponentInterface();
     }
 }
