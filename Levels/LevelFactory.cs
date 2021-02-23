@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace GunCleric.Levels
 {
-    public static class LevelFactory
+    public class LevelFactory
     {
-        public static Level GenerateLevel(int levelNumber)
+        public Level GenerateLevel(int levelNumber)
         {
             var level = new Level(levelNumber);
 

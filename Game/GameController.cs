@@ -16,29 +16,42 @@ namespace GunCleric.Game
         private readonly InputController _inputController;
         private readonly SaveController _saveController;
         private readonly LevelController _levelController;
+        private readonly LevelFactory _levelFactory;
+        private readonly ItemFactory _itemFactory;
+        private readonly ScreenFactory _screenFactory;
+        private readonly PlayerFactory _playerFactory;
 
         public GameController(RenderController renderController, 
             InputController inputController,
             SaveController saveController,
-            LevelController levelController)
+            LevelController levelController,
+            LevelFactory levelFactory,
+            ItemFactory itemFactory,
+            ScreenFactory screenFactory,
+            PlayerFactory playerFactory
+            )
         {
             _renderController = renderController;
             _inputController = inputController;
             _saveController = saveController;
             _levelController = levelController;
+            _levelFactory = levelFactory;
+            _itemFactory = itemFactory;
+            _screenFactory = screenFactory;
+            _playerFactory = playerFactory;
         }
 
         public void Start()
         {
             var gameState = new GameState();
 
-            gameState.Player = PlayerFactory.CreatePlayer("Bungus", new GamePosition(5, 5, 1, Layer.Blocking), _levelController);
+            gameState.Player = _playerFactory.CreatePlayer("Bungus", new GamePosition(5, 5, 1, Layer.Blocking));
 
-            var level = LevelFactory.GenerateLevel(1);
+            var level = _levelFactory.GenerateLevel(1);
             level.AddLevelElement(gameState.Player);
 
-            var testItem1 = ItemFactory.CreateItem("katana", new GamePosition(7, 7, 1, Layer.OnFloor));
-            var testItem2 = ItemFactory.CreateItem("katana", new GamePosition(4, 9, 1, Layer.OnFloor));
+            var testItem1 = _itemFactory.CreateItem("katana", new GamePosition(7, 7, 1, Layer.OnFloor));
+            var testItem2 = _itemFactory.CreateItem("katana", new GamePosition(4, 9, 1, Layer.OnFloor));
 
             level.AddLevelElement(testItem1, Level.AddStyle.Stack);
             level.AddLevelElement(testItem2, Level.AddStyle.Stack);
@@ -46,7 +59,7 @@ namespace GunCleric.Game
             gameState.Levels[1] = level;
             gameState.CurrentLevel = level;
 
-            var mainScreen = ScreenFactory.GetMainScreen(gameState);
+            var mainScreen = _screenFactory.GetMainScreen(gameState);
 
             gameState.CurrentScreen = mainScreen;
 

@@ -4,9 +4,9 @@ using GunCleric.Screens;
 
 namespace GunCleric.Rendering
 {
-    public static class ScreenFactory
+    public class ScreenFactory
     {
-        public static Screen GetMainScreen(GameState gameState)
+        public Screen GetMainScreen(GameState gameState)
         {
             var player = gameState.Player;
             var displayFields = new []

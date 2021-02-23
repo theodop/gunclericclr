@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace GunCleric.Items
 {
-    public static class ItemFactory
+    public class ItemFactory
     {
-        public static Atom CreateItem(string type, GamePosition gamePosition)
+        public Atom CreateItem(string type, GamePosition gamePosition)
         {
             var tile = type switch
             {
