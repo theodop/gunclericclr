@@ -1,5 +1,6 @@
 using System;
 using System.Drawing;
+using GunCleric.Enemies;
 using GunCleric.Geometry;
 using GunCleric.Input;
 using GunCleric.Items;
@@ -20,6 +21,7 @@ namespace GunCleric.Game
         private readonly ItemFactory _itemFactory;
         private readonly ScreenFactory _screenFactory;
         private readonly PlayerFactory _playerFactory;
+        private readonly EnemyFactory _enemyFactory;
 
         public GameController(RenderController renderController, 
             InputController inputController,
@@ -28,7 +30,8 @@ namespace GunCleric.Game
             LevelFactory levelFactory,
             ItemFactory itemFactory,
             ScreenFactory screenFactory,
-            PlayerFactory playerFactory
+            PlayerFactory playerFactory,
+            EnemyFactory enemyFactory
             )
         {
             _renderController = renderController;
@@ -39,6 +42,7 @@ namespace GunCleric.Game
             _itemFactory = itemFactory;
             _screenFactory = screenFactory;
             _playerFactory = playerFactory;
+            _enemyFactory = enemyFactory;
         }
 
         public void Start()
@@ -55,6 +59,9 @@ namespace GunCleric.Game
 
             level.AddLevelElement(testItem1, Level.AddStyle.Stack);
             level.AddLevelElement(testItem2, Level.AddStyle.Stack);
+
+            var enemy = _enemyFactory.CreateEnemy("Mook", new GamePosition(10, 7, 1, Layer.Blocking));
+            level.AddLevelElement(enemy);
 
             gameState.Levels[1] = level;
             gameState.CurrentLevel = level;

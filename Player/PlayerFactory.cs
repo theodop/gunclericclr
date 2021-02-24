@@ -1,3 +1,4 @@
+using GunCleric.Agents;
 using GunCleric.Atoms;
 using GunCleric.Geometry;
 using GunCleric.Items;
@@ -23,6 +24,8 @@ namespace GunCleric.Player
             player.AddComponent(uniqueComponent);
             var inventoryComponent = new InventoryComponent(player, _levelController);
             player.AddComponent(inventoryComponent);
+            var agentComponent = new AgentComponent(player);
+            player.AddComponent(agentComponent);
             return player;
         }
     }

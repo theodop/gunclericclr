@@ -1,4 +1,5 @@
 ﻿using System;
+using GunCleric.Enemies;
 using GunCleric.Game;
 using GunCleric.Input;
 using GunCleric.Items;
@@ -21,6 +22,7 @@ namespace GunCleric
             var itemFactory = new ItemFactory();
             var screenFactory = new ScreenFactory();
             var playerFactory = new PlayerFactory(levelController);
+            var enemyFactory = new EnemyFactory();
 
             var gameController = new GameController(
                 renderController,
@@ -30,7 +32,8 @@ namespace GunCleric
                 levelFactory,
                 itemFactory,
                 screenFactory,
-                playerFactory
+                playerFactory,
+                enemyFactory
             );
 
             gameController.Start();
