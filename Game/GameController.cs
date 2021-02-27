@@ -1,6 +1,7 @@
 using System;
 using System.Drawing;
 using GunCleric.Enemies;
+using GunCleric.Events;
 using GunCleric.Geometry;
 using GunCleric.Input;
 using GunCleric.Items;
@@ -22,6 +23,7 @@ namespace GunCleric.Game
         private readonly ScreenFactory _screenFactory;
         private readonly PlayerFactory _playerFactory;
         private readonly EnemyFactory _enemyFactory;
+        private readonly EventBus _eventBus;
 
         public GameController(RenderController renderController, 
             InputController inputController,
@@ -31,7 +33,8 @@ namespace GunCleric.Game
             ItemFactory itemFactory,
             ScreenFactory screenFactory,
             PlayerFactory playerFactory,
-            EnemyFactory enemyFactory
+            EnemyFactory enemyFactory,
+            EventBus eventBus
             )
         {
             _renderController = renderController;
@@ -43,6 +46,7 @@ namespace GunCleric.Game
             _screenFactory = screenFactory;
             _playerFactory = playerFactory;
             _enemyFactory = enemyFactory;
+            _eventBus = eventBus;
         }
 
         public void Start()
@@ -71,6 +75,8 @@ namespace GunCleric.Game
             gameState.CurrentScreen = mainScreen;
 
             _renderController.Initialise(gameState);
+
+            _eventBus.RegisterEvent("WELCOME");
 
             Loop(gameState);
         }

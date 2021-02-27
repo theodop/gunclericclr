@@ -1,5 +1,7 @@
 ﻿using System;
+using GunCleric.Assets;
 using GunCleric.Enemies;
+using GunCleric.Events;
 using GunCleric.Game;
 using GunCleric.Input;
 using GunCleric.Items;
@@ -20,7 +22,10 @@ namespace GunCleric
             var levelController = new LevelController();
             var levelFactory = new LevelFactory();
             var itemFactory = new ItemFactory();
-            var screenFactory = new ScreenFactory();
+            var assetBank = new AssetBank();
+            var eventBus = new EventBus();
+            var eventKeeper = new EventKeeper(eventBus, assetBank);
+            var screenFactory = new ScreenFactory(eventKeeper);
             var playerFactory = new PlayerFactory(levelController);
             var enemyFactory = new EnemyFactory();
 
@@ -33,7 +38,8 @@ namespace GunCleric
                 itemFactory,
                 screenFactory,
                 playerFactory,
-                enemyFactory
+                enemyFactory,
+                eventBus
             );
 
             gameController.Start();
