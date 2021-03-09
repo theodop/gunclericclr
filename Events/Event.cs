@@ -9,9 +9,9 @@ namespace GunCleric.Events
     public class GCEvent
     {
         public string Id;
-        public IDictionary<string, object> Values;
+        public object Values;
 
-        public GCEvent(string id, IDictionary<string, object> values)
+        public GCEvent(string id, object values)
         {
             Id = id;
             Values = values;

@@ -1,7 +1,8 @@
 ﻿using GunCleric.Atoms;
+using GunCleric.Items.Weapons;
 using System;
 
-namespace GunCleric.Items.Weapons
+namespace GunCleric.Damaging
 {
     public class WeaponComponent : IAtomComponent
     {

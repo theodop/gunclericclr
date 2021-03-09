@@ -34,9 +34,12 @@ namespace GunCleric.Player
 
         public Atom Atom { get; set; }
 
-        public PlayerInputActionController(Atom atom)
+        private PlayerInteractionComponent _interactionComponent;
+
+        public PlayerInputActionController(Atom atom, PlayerInteractionComponent interactionComponent)
         {
             Atom = atom;
+            _interactionComponent = interactionComponent;
         }
 
         public Type GetComponentInterface() => typeof(IInputActionController);
@@ -49,24 +52,20 @@ namespace GunCleric.Player
 
         private void ReactToMovement(InputAction action, GameState gameState)
         {
-            var player = Atom;
-
-            (var x, var y) = action switch
+            var direction = action switch
             {
-                InputAction.MoveUp => (player.Position.X, player.Position.Y - 1),
-                InputAction.MoveUpRight => (player.Position.X + 1, player.Position.Y - 1),
-                InputAction.MoveRight => (player.Position.X + 1, player.Position.Y),
-                InputAction.MoveDownRight => (player.Position.X + 1, player.Position.Y + 1),
-                InputAction.MoveDown => (player.Position.X, player.Position.Y + 1),
-                InputAction.MoveDownLeft => (player.Position.X - 1, player.Position.Y + 1),
-                InputAction.MoveLeft => (player.Position.X - 1, player.Position.Y),
-                InputAction.MoveUpLeft => (player.Position.X - 1, player.Position.Y - 1),
-                _ => (player.Position.X, player.Position.Y)
+                InputAction.MoveUp => CardinalDirection.Top,
+                InputAction.MoveUpRight => CardinalDirection.TopRight,
+                InputAction.MoveRight => CardinalDirection.Right,
+                InputAction.MoveDownRight => CardinalDirection.BottomRight,
+                InputAction.MoveDown => CardinalDirection.Bottom,
+                InputAction.MoveDownLeft => CardinalDirection.BottomLeft,
+                InputAction.MoveLeft => CardinalDirection.Left,
+                InputAction.MoveUpLeft => CardinalDirection.TopLeft,
+                _ => throw new NotImplementedException()
             };
 
-            var newPosition = new GamePosition(x, y, player.Position.Level, player.Position.Layer);
-
-            player.MoveAtom(newPosition, gameState);
+            _interactionComponent.InteractWith(direction, gameState);
         }
 
         private void ReactToInventory(InputAction action, GameState gameState)

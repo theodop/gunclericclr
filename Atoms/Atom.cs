@@ -51,6 +51,19 @@ namespace GunCleric.Atoms
             return (T)Components[typeof(T)];
         }
 
+        public bool TryGetComponent<T>(out T component) where T : IAtomComponent
+        {
+            component = default;
+
+            if (HasComponent<T>())
+            {
+                component = GetComponent<T>();
+                return true;
+            }
+
+            return false;
+        }
+
         public void MoveAtom(GamePosition newPosition, GameState state)
         {
             var oldPosition = Position;

@@ -8,17 +8,21 @@ namespace GunCleric.Assets
 {
     public class AssetBank
     {
-        public string GetAssetString(string id, IDictionary<string, object> values)
+        private readonly IStringFormatter _stringFormatter;
+
+        public AssetBank(IStringFormatter stringFormatter)
+        {
+            _stringFormatter = stringFormatter;
+        }
+
+        public string GetAssetString(string id, object values)
         {
             string result;
             if (_assetStrings.TryGetValue(id, out result))
             {
                 if (values != null)
                 {
-                    foreach (var kvp in values)
-                    {
-                        result = result.Replace($"{kvp.Key}", kvp.Value.ToString());
-                    }
+                    result = _stringFormatter.Format(result, values);
                 }
             }
             else result = $"Asset string {id} not found.";
@@ -29,7 +33,8 @@ namespace GunCleric.Assets
         private IDictionary<string, string> _assetStrings = new Dictionary<string, string>
         {
             {"WELCOME", "Welcome to GunCleric!" },
-            {"HIT", "{doer} hit {doee}." }
+            {"HIT", "{doer} hit {doee} for {damage} damage." },
+            {"HIT_NO_DAM", "{doer} hit {doee} but it had no effect." }
         };
     }
 }

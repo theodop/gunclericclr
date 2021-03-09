@@ -23,7 +23,7 @@ namespace GunCleric.Events
             }
         }
 
-        public void RegisterEvent(string id, IDictionary<string, object> values = null)
+        public void RegisterEvent(string id, object values = null)
         {
             RegisterEvent(new GCEvent(id, values));
         }

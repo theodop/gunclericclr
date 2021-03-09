@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GunCleric.Items.Weapons
+namespace GunCleric.Damaging
 {
     public struct Damage
     {

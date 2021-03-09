@@ -16,18 +16,20 @@ namespace GunCleric
     {
         static void Main(string[] args)
         {
+            var random = new Random();
             var renderController = new RenderController();
             var inputController = new InputController();
             var saveController = new SaveController();
             var levelController = new LevelController();
             var levelFactory = new LevelFactory();
             var itemFactory = new ItemFactory();
-            var assetBank = new AssetBank();
+            var stringFormatter = new StringFormatterSmartFormat();
+            var assetBank = new AssetBank(stringFormatter);
             var eventBus = new EventBus();
             var eventKeeper = new EventKeeper(eventBus, assetBank);
             var screenFactory = new ScreenFactory(eventKeeper);
-            var playerFactory = new PlayerFactory(levelController);
-            var enemyFactory = new EnemyFactory();
+            var playerFactory = new PlayerFactory(levelController, eventBus, random);
+            var enemyFactory = new EnemyFactory(eventBus);
 
             var gameController = new GameController(
                 renderController,

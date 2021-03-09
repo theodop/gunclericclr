@@ -1,6 +1,6 @@
+- Fix display field overflow
 - Equipping
-- Make factories non-static
+- Equipping weapon damage
 - Inventory screen
 - Allow player to drop
 - Serialise and deserialise
-- Move player movement into component
