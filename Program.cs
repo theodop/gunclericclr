@@ -31,7 +31,9 @@ namespace GunCleric
             var playerFactory = new PlayerFactory(levelController, eventBus, random);
             var enemyFactory = new EnemyFactory(eventBus);
 
-            var gameController = new GameController(
+            try
+            {
+                var gameController = new GameController(
                 renderController,
                 inputController,
                 saveController,
@@ -42,9 +44,14 @@ namespace GunCleric
                 playerFactory,
                 enemyFactory,
                 eventBus
-            );
+                );
 
-            gameController.Start();
+                gameController.Start();
+            }
+            finally
+            {
+                renderController.Dispose();
+            }
         }
     }
 }

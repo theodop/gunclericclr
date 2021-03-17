@@ -5,8 +5,9 @@ using System.Linq;
 
 namespace GunCleric.Rendering
 {
-    public class RenderController
+    public class RenderController : IDisposable
     {
+
         public void Initialise(GameState gameState)
         {
             try
@@ -105,6 +106,11 @@ namespace GunCleric.Rendering
             }
 
             Console.SetCursorPosition(0, 0);
+        }
+
+        public void Dispose()
+        {
+            try { Console.Clear(); } catch { }
         }
     }
 }
