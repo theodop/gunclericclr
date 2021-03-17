@@ -9,6 +9,12 @@ namespace GunCleric.Rendering
     {
         public void Initialise(GameState gameState)
         {
+            try
+            {
+                Console.Clear();
+            }
+            catch { }
+
             if (gameState.LastImage == null)
             {
                 gameState.LastImage = new char[gameState.WindowSize.Height, gameState.WindowSize.Width];
