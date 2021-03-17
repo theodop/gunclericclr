@@ -1,21 +1,45 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Drawing;
 
 namespace GunCleric.Rendering
 {
     public class DisplayField
     {
-        public int X {get;}
-        public int Y {get;}
+        public Rectangle DrawArea { get; set; }
+
+        public int X => DrawArea.X;
+        public int Y => DrawArea.Y;
 
         [NotNull]
-        public Func<string> GetValue {get;}
+        private Func<string> _getValueFunc;
 
-        public DisplayField(int x, int y, Func<string> getFunc)
+        public string GetValue()
         {
-            X = x;
-            Y = y;
-            GetValue = getFunc;
+            var value = _getValueFunc()?.Trim() ?? "";
+
+            if (value.Length < DrawArea.Width) 
+            {
+                value = $"{value}{new string(' ', DrawArea.Width - value.Length)}";
+            } 
+            else
+            {
+                value = value.Substring(0, DrawArea.Width);
+            }
+
+            return value;
+        }
+
+        public DisplayField(Rectangle drawArea, Func<string> getValueFunc)
+        {
+            _getValueFunc = getValueFunc;
+            DrawArea = drawArea;
+        }
+
+        public DisplayField(int x, int y, int width, Func<string> getValueFunc) 
+            : this(new Rectangle(x, y, width, 1), getValueFunc)
+        {
+
         }
     }
 }

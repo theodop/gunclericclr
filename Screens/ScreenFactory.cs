@@ -19,12 +19,12 @@ namespace GunCleric.Rendering
             var player = gameState.Player;
             var displayFields = new[]
             {
-                new DisplayField(2, 22, () => player.GetComponent<UniqueAtomComponent>().Name),
-                new DisplayField(2, 23, () => $"Health: {gameState.Hp}%"),
-                new DisplayField(15, 23, () => $"Exp: {gameState.Xp}"),
-                new DisplayField(29, 22, () => $"Armour: {gameState.Armour}"),
-                new DisplayField(29, 23, () => $"Weapon: {gameState.Weapon}"),
-                new DisplayField(2, 1, () => _eventKeeper.GetLatestEventString())
+                new DisplayField(2, 22, 25, () => player.GetComponent<UniqueAtomComponent>().Name),
+                new DisplayField(2, 23, 11, () => $"Health: {gameState.Hp}%"),
+                new DisplayField(15, 23, 12, () => $"Exp: {gameState.Xp}"),
+                new DisplayField(29, 22, 25, () => $"Armour: {gameState.Armour}"),
+                new DisplayField(29, 23, 25, () => $"Weapon: {gameState.Weapon}"),
+                new DisplayField(2, 1, 40, () => _eventKeeper.GetLatestEventString())
             };
 
             var viewports = new []
