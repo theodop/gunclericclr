@@ -1,4 +1,3 @@
-- Fix display field overflow
 - Equipping
 - Equipping weapon damage
 - Inventory screen

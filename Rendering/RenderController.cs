@@ -32,6 +32,9 @@ namespace GunCleric.Rendering
 
             foreach (var viewport in screen.Viewports)
             {
+                var offsetX = viewport.AtomToTrack.Position.X - viewport.Area.Width / 2;
+                var offsetY = viewport.AtomToTrack.Position.Y - viewport.Area.Height / 2;
+
                 for (int i = 0; i < viewport.Area.Height; i++)
                 {
                     var newLine = GenerateLine(viewport.Area.Width);
@@ -40,7 +43,7 @@ namespace GunCleric.Rendering
                     {
                         char? thisChar = null;
 
-                        foreach (var atom in gameState.CurrentLevel.GetAtoms(j, i))
+                        foreach (var atom in gameState.CurrentLevel.GetAtoms(j + offsetX, i + offsetY))
                         {
                             thisChar = atom.Tile;
                         }

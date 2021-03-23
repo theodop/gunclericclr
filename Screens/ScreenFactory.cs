@@ -29,7 +29,7 @@ namespace GunCleric.Rendering
 
             var viewports = new []
             {
-                new Viewport(new System.Drawing.Rectangle(1, 3, 78, 17))
+                new Viewport(new System.Drawing.Rectangle(1, 3, 78, 17), gameState.Player)
             };
 
             var mainScreen = new Screen(displayFields, viewports, new MainScreenInputActionController());
