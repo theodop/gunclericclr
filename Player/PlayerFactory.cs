@@ -33,7 +33,7 @@ namespace GunCleric.Player
             player.AddComponent(inputActionController);
             var uniqueComponent = new UniqueAtomComponent(player, name);
             player.AddComponent(uniqueComponent);
-            var inventoryComponent = new InventoryComponent(player, _levelController);
+            var inventoryComponent = new InventoryComponent(player, _levelController, _eventBus);
             player.AddComponent(inventoryComponent);
             var agentComponent = new AgentComponent(player);
             player.AddComponent(agentComponent);

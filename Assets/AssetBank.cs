@@ -34,7 +34,8 @@ namespace GunCleric.Assets
         {
             {"WELCOME", "Welcome to GunCleric!" },
             {"HIT", "{doer} hit {doee} for {damage} damage." },
-            {"HIT_NO_DAM", "{doer} hit {doee} but it had no effect." }
+            {"HIT_NO_DAM", "{doer} hit {doee} but it had no effect." },
+            {"PICKUP", "{doer} picked up {doee}." }
         };
     }
 }

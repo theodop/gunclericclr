@@ -1,4 +1,5 @@
 ﻿using GunCleric.Atoms;
+using GunCleric.Events;
 using GunCleric.Game;
 using GunCleric.Geometry;
 using GunCleric.Levels;
@@ -16,13 +17,15 @@ namespace GunCleric.Items
 
         private IList<Atom> _inventory = new List<Atom>();
         private readonly LevelController _levelController;
+        private readonly EventBus _eventBus;
 
         public Type GetComponentInterface() => typeof(InventoryComponent);
 
-        public InventoryComponent(Atom atom, LevelController levelController)
+        public InventoryComponent(Atom atom, LevelController levelController, EventBus eventBus)
         {
             Atom = atom;
             _levelController = levelController;
+            _eventBus = eventBus;
         }
 
         public void PickUp(GameState gameState)
@@ -36,6 +39,7 @@ namespace GunCleric.Items
             {
                 _levelController.RemoveLevelElement(item, gameState);
                 _inventory.Add(item);
+                _eventBus.RegisterEvent("PICKUP", new { doer = Atom, doee = item });
             }
         }
     }

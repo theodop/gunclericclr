@@ -27,12 +27,12 @@ namespace GunCleric.Damaging
             if (victim.TryGetComponent<DamagedComponent>(out var damaged))
             {
                 var damageApplied = damaged.PreviewDamage(damage);
-                _eventBus.RegisterEvent("HIT", new { doer = attacker.Type, doee = victim.Type, damage = damageApplied });
+                _eventBus.RegisterEvent("HIT", new { doer = attacker, doee = victim, damage = damageApplied });
                 damaged.ApplyDamage(damage);
             }
             else
             {
-                _eventBus.RegisterEvent("HIT_NO_DAM", new { doer = attacker.Type, doee = victim.Type });
+                _eventBus.RegisterEvent("HIT_NO_DAM", new { doer = attacker, doee = victim });
             }
         }
     }

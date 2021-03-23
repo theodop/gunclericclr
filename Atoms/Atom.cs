@@ -87,5 +87,14 @@ namespace GunCleric.Atoms
                 Position = oldPosition;
             }
         }
+
+        public override string ToString()
+        {
+            if (TryGetComponent<UniqueAtomComponent>(out var unique))
+            {
+                return unique.Name;
+            }
+            else return Type;
+        }
     }
 }
