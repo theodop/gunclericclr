@@ -9,6 +9,7 @@ using GunCleric.Levels;
 using GunCleric.Player;
 using GunCleric.Rendering;
 using GunCleric.Saving;
+using GunCleric.Scheduler;
 
 namespace GunCleric
 {
@@ -17,6 +18,7 @@ namespace GunCleric
         static void Main(string[] args)
         {
             var random = new Random();
+            var scheduleController = new ScheduleController();
             var renderController = new RenderController();
             var inputController = new InputController();
             var saveController = new SaveController();
@@ -28,7 +30,7 @@ namespace GunCleric
             var eventBus = new EventBus();
             var eventKeeper = new EventKeeper(eventBus, assetBank);
             var screenFactory = new ScreenFactory(eventKeeper);
-            var playerFactory = new PlayerFactory(levelController, eventBus, random);
+            var playerFactory = new PlayerFactory(levelController, eventBus, random, scheduleController);
             var enemyFactory = new EnemyFactory(eventBus);
 
             try

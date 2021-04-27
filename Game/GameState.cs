@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using GunCleric.Atoms;
 using GunCleric.Rendering;
 using GunCleric.Levels;
+using GunCleric.Scheduler;
 
 namespace GunCleric.Game
 {
@@ -36,5 +37,9 @@ namespace GunCleric.Game
         public Level CurrentLevel;
 
         public char[,] LastImage;
+
+        public Schedule Schedule = new Schedule();
+
+        public DateTime CurrentTime = new DateTime(2016, 10, 8, 7, 22, 0);
     }
 }

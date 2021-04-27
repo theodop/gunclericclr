@@ -19,6 +19,7 @@ namespace GunCleric.Rendering
             var player = gameState.Player;
             var displayFields = new[]
             {
+                new DisplayField(2, 21, 50, () => gameState.CurrentTime.ToString("yyyy-MM-dd HH:mm:ss.fff")),
                 new DisplayField(2, 22, 25, () => player.GetComponent<UniqueAtomComponent>().Name),
                 new DisplayField(2, 23, 11, () => $"Health: {gameState.Hp}%"),
                 new DisplayField(15, 23, 12, () => $"Exp: {gameState.Xp}"),

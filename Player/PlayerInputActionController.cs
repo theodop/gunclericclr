@@ -4,11 +4,11 @@ using GunCleric.Geometry;
 using GunCleric.Input;
 using GunCleric.Items;
 using GunCleric.Levels;
+using GunCleric.Scheduler;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace GunCleric.Player
 {
@@ -23,7 +23,7 @@ namespace GunCleric.Player
             InputAction.MoveDown,
             InputAction.MoveDownLeft,
             InputAction.MoveLeft,
-            InputAction.MoveUpLeft
+            InputAction.MoveUpLeft,
         };
 
         private static readonly HashSet<InputAction> InventoryActions = new HashSet<InputAction>
@@ -35,11 +35,15 @@ namespace GunCleric.Player
         public Atom Atom { get; set; }
 
         private PlayerInteractionComponent _interactionComponent;
+        private ScheduleController _scheduleController;
 
-        public PlayerInputActionController(Atom atom, PlayerInteractionComponent interactionComponent)
+        public PlayerInputActionController(Atom atom, 
+            PlayerInteractionComponent interactionComponent,
+            ScheduleController scheduleController)
         {
             Atom = atom;
             _interactionComponent = interactionComponent;
+            _scheduleController = scheduleController;
         }
 
         public Type GetComponentInterface() => typeof(IInputActionController);
@@ -48,6 +52,12 @@ namespace GunCleric.Player
         {
             if (MovementActions.Contains(action)) ReactToMovement(action, gameState);
             else if (InventoryActions.Contains(action)) ReactToInventory(action, gameState);
+            else if (action == InputAction.Wait) Wait(gameState);
+        }
+
+        private void Wait(GameState gameState)
+        {
+            _scheduleController.Schedule(t => { }, 100, gameState, returnControl: true);
         }
 
         private void ReactToMovement(InputAction action, GameState gameState)
@@ -65,7 +75,12 @@ namespace GunCleric.Player
                 _ => throw new NotImplementedException()
             };
 
-            _interactionComponent.InteractWith(direction, gameState);
+            _scheduleController.Schedule(
+                t => _interactionComponent.InteractWith(direction, gameState),
+                100,
+                gameState,
+                returnControl: true
+            );
         }
 
         private void ReactToInventory(InputAction action, GameState gameState)

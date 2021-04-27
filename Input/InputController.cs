@@ -26,6 +26,7 @@ namespace GunCleric.Input
                 ConsoleKey.A    => InputAction.MoveLeft,
                 ConsoleKey.Q    => InputAction.MoveUpLeft,
                 ConsoleKey.G    => InputAction.PickUp,
+                ConsoleKey.S    => InputAction.Wait,
                 _               => InputAction.None
             };
         }

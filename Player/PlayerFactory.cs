@@ -5,6 +5,7 @@ using GunCleric.Events;
 using GunCleric.Geometry;
 using GunCleric.Items;
 using GunCleric.Levels;
+using GunCleric.Scheduler;
 using System;
 
 namespace GunCleric.Player
@@ -14,12 +15,15 @@ namespace GunCleric.Player
         private readonly LevelController _levelController;
         private readonly EventBus _eventBus;
         private readonly Random _random;
+        private readonly ScheduleController _scheduleController;
 
-        public PlayerFactory(LevelController levelController, EventBus eventBus, Random random)
+        public PlayerFactory(LevelController levelController, EventBus eventBus, Random random,
+            ScheduleController scheduleController)
         {
             _levelController = levelController;
             _eventBus = eventBus;
             _random = random;
+            _scheduleController = scheduleController;
         }
 
         public Atom CreatePlayer(string name, GamePosition position)
@@ -29,7 +33,7 @@ namespace GunCleric.Player
             player.AddComponent(damagerComponent);
             var interactionComponent = new PlayerInteractionComponent(player, _levelController, damagerComponent, _random);
             player.AddComponent(interactionComponent);
-            var inputActionController = new PlayerInputActionController(player, interactionComponent);
+            var inputActionController = new PlayerInputActionController(player, interactionComponent, _scheduleController);
             player.AddComponent(inputActionController);
             var uniqueComponent = new UniqueAtomComponent(player, name);
             player.AddComponent(uniqueComponent);

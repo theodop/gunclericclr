@@ -102,6 +102,20 @@ namespace GunCleric.Game
             var action = _inputController.GetActionFromInput(input);
 
             gameState.CurrentScreen.ScreenActionController.ReactToAction(action, gameState);
+
+            while (true)
+            {
+                var task = gameState.Schedule.Pop();
+
+                if (task != null)
+                {
+                    gameState.CurrentTime = task.EndTime;
+
+                    task.Task(task);
+                }
+
+                if (task == null || task.ReturnControl) break;
+            } 
         }
     }
 }
