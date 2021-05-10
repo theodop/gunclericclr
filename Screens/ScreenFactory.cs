@@ -2,6 +2,7 @@ using GunCleric.Atoms;
 using GunCleric.Events;
 using GunCleric.Game;
 using GunCleric.Screens;
+using Pastel;
 
 namespace GunCleric.Rendering
 {
@@ -21,7 +22,7 @@ namespace GunCleric.Rendering
             {
                 new DisplayField(2, 21, 50, () => gameState.CurrentTime.ToString("yyyy-MM-dd HH:mm:ss.fff")),
                 new DisplayField(2, 22, 25, () => player.GetComponent<UniqueAtomComponent>().Name),
-                new DisplayField(2, 23, 11, () => $"Health: {gameState.Hp}%"),
+                new DisplayField(2, 23, 11, () => $"Health: {gameState.Hp}%".Pastel("#FF0000")),
                 new DisplayField(15, 23, 12, () => $"Exp: {gameState.Xp}"),
                 new DisplayField(29, 22, 25, () => $"Armour: {gameState.Armour}"),
                 new DisplayField(29, 23, 25, () => $"Weapon: {gameState.Weapon}"),

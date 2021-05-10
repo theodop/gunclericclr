@@ -2,11 +2,16 @@ using GunCleric.Game;
 using GunCleric.Extensions;
 using System;
 using System.Linq;
+using System.Drawing;
+using System.Text;
+using Pastel;
 
 namespace GunCleric.Rendering
 {
     public class RenderController : IDisposable
     {
+
+        private StringBuilder _sb = new StringBuilder();
 
         public void Initialise(GameState gameState)
         {
@@ -18,8 +23,7 @@ namespace GunCleric.Rendering
 
             if (gameState.LastImage == null)
             {
-                gameState.LastImage = new char[gameState.WindowSize.Height, gameState.WindowSize.Width];
-                gameState.LastImage.Populate(' ');
+                gameState.LastImage = new RenderedImage(gameState.WindowSize);
             }
             Console.CursorVisible = false;
         }
@@ -27,8 +31,7 @@ namespace GunCleric.Rendering
         public void Render(GameState gameState)
         {
             var screen = gameState.CurrentScreen;
-            var newImage = new char[gameState.WindowSize.Height, gameState.WindowSize.Width];
-            gameState.LastImage.CopyTo(newImage);
+            var newImage = new RenderedImage(gameState.LastImage);
 
             foreach (var viewport in screen.Viewports)
             {
@@ -41,7 +44,7 @@ namespace GunCleric.Rendering
                     
                     for (int j = 0; j < viewport.Area.Width; j++)
                     {
-                        char? thisChar = null;
+                        ColouredChar? thisChar = null;
 
                         foreach (var atom in gameState.CurrentLevel.GetAtoms(j + offsetX, i + offsetY))
                         {
@@ -54,18 +57,20 @@ namespace GunCleric.Rendering
                         }
                     }
 
-                    InjectIntoImage(newImage, newLine, viewport.Area.X, viewport.Area.Y + i);
+                    newImage.Inject(newLine, viewport.Area.X, viewport.Area.Y + i);
                 }
             }
+
+            var renderRect = new Rectangle(new Point(0,0), gameState.WindowSize);
 
             foreach (var displayField in screen.DisplayFields)
             {
                 var value = displayField.GetValue();
                 var lastX = Math.Min(displayField.X + value.Length, gameState.WindowSize.Width);
 
-                if (gameState.WindowSize.Intersect(displayField.X, displayField.Y))
+                if (renderRect.Intersect(displayField.X, displayField.Y))
                 {
-                    InjectIntoImage(newImage, value.ToCharArray(), displayField.X, displayField.Y);
+                    newImage.Inject(value.ToColouredCharArray(), displayField.X, displayField.Y);
                 }
             }
 
@@ -74,9 +79,9 @@ namespace GunCleric.Rendering
             gameState.LastImage = newImage;
         }
 
-        private char[] GenerateLine(int length, char value = ' ')
+        private ColouredChar[] GenerateLine(int length, char value = ' ')
         {
-            var line = new char[length];
+            var line = new ColouredChar[length];
 
             for (int i = 0; i < length; i++)
             {
@@ -86,17 +91,9 @@ namespace GunCleric.Rendering
             return line;
         }
 
-        private void InjectIntoImage(char[,] image, char[] value, int x, int y)
+        private void RenderToConsole(RenderedImage newImage, RenderedImage lastImage)
         {
-            for (int i = x; i < Math.Min(image.GetLength(1), value.Length + x); i++)
-            {
-                image[y, i] = value[i - x];
-            }
-        }
-
-        private void RenderToConsole(char[,] newImage, char[,] lastImage)
-        {
-            for (int i = 0; i < newImage.GetLength(0); i++)
+            for (int i = 0; i < newImage.Size.Height; i++)
             {
                 var newRow = newImage.GetRow(i);
                 var oldRow = lastImage.GetRow(i);
@@ -104,11 +101,22 @@ namespace GunCleric.Rendering
                 if (newRow != oldRow)
                 {
                     Console.SetCursorPosition(0, i);
-                    Console.WriteLine(newRow);
+                    var row = RenderRow(newRow);
+                    Console.Write(row);
                 }
             }
 
             Console.SetCursorPosition(0, 0);
+        }
+
+        private string RenderRow(ColouredChar[] row)
+        {
+            _sb.Clear();
+            foreach (var cchar in row)
+            {
+                _sb.Append(cchar.Char.ToString().Pastel(cchar.Color));
+            }
+            return _sb.ToString();
         }
 
         public void Dispose()

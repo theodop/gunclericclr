@@ -4,6 +4,7 @@ using System.Runtime.Serialization;
 using GunCleric.Game;
 using GunCleric.Geometry;
 using GunCleric.Player;
+using GunCleric.Rendering;
 
 namespace GunCleric.Atoms
 {
@@ -17,11 +18,11 @@ namespace GunCleric.Atoms
         [DataMember]
         public string Type;
         [DataMember]
-        public char Tile;
+        public ColouredChar Tile;
         [DataMember]
         public GamePosition Position;
 
-        public Atom(string type, char tile, GamePosition position)
+        public Atom(string type, ColouredChar tile, GamePosition position)
         {
             Type = type;
             Tile = tile;

@@ -1,7 +1,9 @@
 ﻿using GunCleric.Atoms;
 using GunCleric.Geometry;
+using GunCleric.Rendering;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +12,12 @@ namespace GunCleric.Levels
 {
     public class LevelFactory
     {
+        private readonly Random _rand;
+        public LevelFactory(Random rand)
+        {
+            _rand = rand;
+        }
+
         public Level GenerateLevel(int levelNumber)
         {
             var level = new Level(levelNumber);
@@ -24,7 +32,7 @@ namespace GunCleric.Levels
             return level;
         }
 
-        private static IEnumerable<Atom> GenerateRoom(int left, int top, int width, int height, int level)
+        private IEnumerable<Atom> GenerateRoom(int left, int top, int width, int height, int level)
         {
             var right = left + width - 1;
             var bottom = top + height - 1;
@@ -48,7 +56,10 @@ namespace GunCleric.Levels
             {
                 for (int y = top + 1; y < bottom; y++)
                 {
-                    yield return new Atom("Floor", '.', new GamePosition(x, y, level, Layer.Floor));
+                    var r = (int)(131 + _rand.NextDouble() * (210 - 131));
+                    var g = (int)(80 + _rand.NextDouble() * (165 - 80));
+                    var b = (int)(46 + _rand.NextDouble() * (109 - 46));
+                    yield return new Atom("Floor", new ColouredChar('.', Color.FromArgb(255, r, g, b)), new GamePosition(x, y, level, Layer.Floor));
                 }
             }
         }

@@ -23,7 +23,7 @@ namespace GunCleric
             var inputController = new InputController();
             var saveController = new SaveController();
             var levelController = new LevelController();
-            var levelFactory = new LevelFactory();
+            var levelFactory = new LevelFactory(random);
             var itemFactory = new ItemFactory();
             var stringFormatter = new StringFormatterSmartFormat();
             var assetBank = new AssetBank(stringFormatter);
@@ -31,7 +31,7 @@ namespace GunCleric
             var eventKeeper = new EventKeeper(eventBus, assetBank);
             var screenFactory = new ScreenFactory(eventKeeper);
             var playerFactory = new PlayerFactory(levelController, eventBus, random, scheduleController);
-            var enemyFactory = new EnemyFactory(eventBus);
+            var enemyFactory = new EnemyFactory(eventBus, random, scheduleController);
 
             try
             {
@@ -45,7 +45,8 @@ namespace GunCleric
                 screenFactory,
                 playerFactory,
                 enemyFactory,
-                eventBus
+                eventBus,
+                scheduleController
                 );
 
                 gameController.Start();

@@ -5,3 +5,4 @@
 - Allow player to drop
 - Serialise and deserialise
 - Colours
+- Animation

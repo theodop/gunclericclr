@@ -25,6 +25,19 @@ namespace GunCleric.Extensions
             }
         }
 
+        public static void CopyTo<T>(this T[] oldArray, T[] newArray)
+        {
+            if (newArray.Length != oldArray.Length)
+            {
+                throw new IndexOutOfRangeException("The dimensions of the arrays do not match");
+            }
+
+            for (int i=0; i<oldArray.Length; i++)
+            {
+                newArray[i] = oldArray[i];
+            }
+        }
+
         public static void CopyTo<T>(this T[,] oldArray, T[,] newArray)
         {
             if (newArray.GetLength(0) != oldArray.GetLength(0) || newArray.GetLength(1) != oldArray.GetLength(1))

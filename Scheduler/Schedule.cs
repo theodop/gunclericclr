@@ -15,7 +15,15 @@ namespace GunCleric.Scheduler
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-        public void Push(ScheduledTask task) => _tasks.Add(task);
+        public void Push(ScheduledTask task)
+        {
+            while (_tasks.Contains(task))
+            {
+                task.EndTime = task.EndTime.AddTicks(1);
+            }
+
+            _tasks.Add(task);
+        }
 
         internal ScheduledTask Pop()
         {

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Drawing;
 using GunCleric.Enemies;
 using GunCleric.Events;
@@ -9,6 +9,7 @@ using GunCleric.Levels;
 using GunCleric.Player;
 using GunCleric.Rendering;
 using GunCleric.Saving;
+using GunCleric.Scheduler;
 
 namespace GunCleric.Game
 {
@@ -24,6 +25,7 @@ namespace GunCleric.Game
         private readonly PlayerFactory _playerFactory;
         private readonly EnemyFactory _enemyFactory;
         private readonly EventBus _eventBus;
+        private readonly ScheduleController _scheduleController;
 
         public GameController(RenderController renderController, 
             InputController inputController,
@@ -34,7 +36,8 @@ namespace GunCleric.Game
             ScreenFactory screenFactory,
             PlayerFactory playerFactory,
             EnemyFactory enemyFactory,
-            EventBus eventBus
+            EventBus eventBus,
+            ScheduleController scheduleController
             )
         {
             _renderController = renderController;
@@ -47,13 +50,14 @@ namespace GunCleric.Game
             _playerFactory = playerFactory;
             _enemyFactory = enemyFactory;
             _eventBus = eventBus;
+            _scheduleController = scheduleController;
         }
 
         public void Start()
         {
             var gameState = new GameState();
 
-            gameState.Player = _playerFactory.CreatePlayer("Bungus", new GamePosition(5, 5, 1, Layer.Blocking));
+            gameState.Player = _playerFactory.CreatePlayer("Bungus👨‍⚖", new GamePosition(5, 5, 1, Layer.Blocking));
 
             var level = _levelFactory.GenerateLevel(1);
             level.AddLevelElement(gameState.Player);
@@ -64,7 +68,7 @@ namespace GunCleric.Game
             level.AddLevelElement(testItem1, Level.AddStyle.Stack);
             level.AddLevelElement(testItem2, Level.AddStyle.Stack);
 
-            var enemy = _enemyFactory.CreateEnemy("Mook", new GamePosition(10, 7, 1, Layer.Blocking));
+            var enemy = _enemyFactory.CreateEnemy("Mook", new GamePosition(10, 7, 1, Layer.Blocking), gameState);
             level.AddLevelElement(enemy);
 
             gameState.Levels[1] = level;
@@ -112,6 +116,11 @@ namespace GunCleric.Game
                     gameState.CurrentTime = task.EndTime;
 
                     task.Task(task);
+
+                    if (task.Reschedule)
+                    {
+                        _scheduleController.Reschedule(task, gameState);
+                    }
                 }
 
                 if (task == null || task.ReturnControl) break;

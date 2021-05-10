@@ -30,13 +30,13 @@ namespace GunCleric.Game
         public Atom Player;
 
         [DataMember]
-        public Rectangle WindowSize = new Rectangle(0, 0, 80, 25);
+        public Size WindowSize = new Size(80, 25);
 
         public IDictionary<int, Level> Levels = new Dictionary<int, Level>();
 
         public Level CurrentLevel;
 
-        public char[,] LastImage;
+        public RenderedImage LastImage;
 
         public Schedule Schedule = new Schedule();
 

@@ -13,6 +13,8 @@ namespace GunCleric.Scheduler
         public bool ReturnControl;
         public Action<ScheduledTask> Task;
 
+        public bool Reschedule { get; internal set; }
+
         public int CompareTo(ScheduledTask other)
         {
             return EndTime.CompareTo(other.EndTime);
