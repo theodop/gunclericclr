@@ -5,6 +5,7 @@ using System.Linq;
 using System.Drawing;
 using System.Text;
 using Pastel;
+using System.Collections.Generic;
 
 namespace GunCleric.Rendering
 {
@@ -13,8 +14,11 @@ namespace GunCleric.Rendering
 
         private StringBuilder _sb = new StringBuilder();
 
+        private Dictionary<ColouredChar, string> _ansiStringCache = new Dictionary<ColouredChar, string>();
+
         public void Initialise(GameState gameState)
         {
+            Console.OutputEncoding = Encoding.UTF8;
             try
             {
                 Console.Clear();
@@ -114,7 +118,14 @@ namespace GunCleric.Rendering
             _sb.Clear();
             foreach (var cchar in row)
             {
-                _sb.Append(cchar.Char.ToString().Pastel(cchar.Color));
+                if (!_ansiStringCache.ContainsKey(cchar))
+                {
+                    _ansiStringCache[cchar] = cchar.Char.ToString().Pastel(cchar.Color);
+                }
+
+                var thisString = _ansiStringCache[cchar];
+
+                _sb.Append(thisString);
             }
             return _sb.ToString();
         }

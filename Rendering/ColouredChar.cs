@@ -27,5 +27,13 @@ namespace GunCleric.Rendering
         {
             return Char.ToString();
         }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return 23 * (int)Char + 17 * Color.GetHashCode();
+            }
+        }
     }
 }
