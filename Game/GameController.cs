@@ -102,29 +102,15 @@ namespace GunCleric.Game
 
         private void Update(GameState gameState)
         {
-            var input = _inputController.GetConsoleInput();
-            var action = _inputController.GetActionFromInput(input);
-
-            gameState.CurrentScreen.ScreenActionController.ReactToAction(action, gameState);
-
-            while (true)
+            while (!gameState.Schedule.SuspendControl)
             {
-                var task = gameState.Schedule.Pop();
+                var input = _inputController.GetConsoleInput();
+                var action = _inputController.GetActionFromInput(input);
 
-                if (task != null)
-                {
-                    gameState.CurrentTime = task.EndTime;
+                gameState.CurrentScreen.ScreenActionController.ReactToAction(action, gameState);
+            }
 
-                    task.Task(task);
-
-                    if (task.Reschedule)
-                    {
-                        _scheduleController.Reschedule(task, gameState);
-                    }
-                }
-
-                if (task == null || task.ReturnControl) break;
-            } 
+            _scheduleController.RunUntilUnsuspended(gameState);
         }
     }
 }

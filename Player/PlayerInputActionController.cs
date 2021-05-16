@@ -57,7 +57,7 @@ namespace GunCleric.Player
 
         private void Wait(GameState gameState)
         {
-            _scheduleController.Schedule(t => { }, 100, gameState, returnControl: true);
+            _scheduleController.Schedule(t => { }, 100, gameState, suspendControl: true);
         }
 
         private void ReactToMovement(InputAction action, GameState gameState)
@@ -79,7 +79,7 @@ namespace GunCleric.Player
                 t => _interactionComponent.InteractWith(direction, gameState),
                 100,
                 gameState,
-                returnControl: true
+                suspendControl: true
             );
         }
 

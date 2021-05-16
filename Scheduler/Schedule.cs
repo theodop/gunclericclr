@@ -10,6 +10,7 @@ namespace GunCleric.Scheduler
     public class Schedule : IEnumerable<ScheduledTask>
     {
         private SortedSet<ScheduledTask> _tasks = new SortedSet<ScheduledTask>();
+        internal bool SuspendControl;
 
         public IEnumerator<ScheduledTask> GetEnumerator() => _tasks.GetEnumerator();
 

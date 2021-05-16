@@ -10,7 +10,7 @@ namespace GunCleric.Scheduler
     {
         public DateTime StartTime;
         public DateTime EndTime;
-        public bool ReturnControl;
+        public bool SuspendControl;
         public Action<ScheduledTask> Task;
 
         public bool Reschedule { get; internal set; }
