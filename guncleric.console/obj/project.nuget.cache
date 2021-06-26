@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "dgSpecHash": "hoVTll9k7BQ6UFXNZXNe/ey2G9Z/ROmBwXV3gVJU5ZbV4C/axKVwXIXTvzgrifY+lSWn1ZWO+cs7ITsOzOg0sg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\theod\\source\\repos\\gunclericclr\\guncleric.console\\guncleric.console.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\theod\\.nuget\\packages\\jetbrains.annotations\\11.1.0\\jetbrains.annotations.11.1.0.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
+    "C:\\Users\\theod\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
+    "C:\\Users\\theod\\.nuget\\packages\\smartformat.net\\2.6.2\\smartformat.net.2.6.2.nupkg.sha512",
+    "C:\\Users\\theod\\.nuget\\packages\\system.drawing.primitives\\4.3.0\\system.drawing.primitives.4.3.0.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.runtime\\4.3.0\\system.runtime.4.3.0.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.runtime.extensions\\4.3.0\\system.runtime.extensions.4.3.0.nupkg.sha512",
+    "C:\\Users\\theod\\.nuget\\packages\\system.text.json\\4.7.2\\system.text.json.4.7.2.nupkg.sha512",
+    "C:\\Users\\theod\\.nuget\\packages\\system.valuetuple\\4.5.0\\system.valuetuple.4.5.0.nupkg.sha512",
+    "C:\\Users\\theod\\.nuget\\packages\\truecolorconsole\\1.0.2\\truecolorconsole.1.0.2.nupkg.sha512"
+  ],
+  "logs": []
+}
