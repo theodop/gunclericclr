@@ -30,7 +30,7 @@ namespace GunCleric.Game
         public Atom Player;
 
         [DataMember]
-        public Size WindowSize = new Size(80, 25);
+        public Size WindowSize = new Size(80, 24);
 
         public IDictionary<int, Level> Levels = new Dictionary<int, Level>();
 

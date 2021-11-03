@@ -57,7 +57,7 @@ namespace GunCleric.Game
         {
             var gameState = new GameState();
 
-            gameState.Player = _playerFactory.CreatePlayer("Bungus\u231A", new GamePosition(5, 5, 1, Layer.Blocking));
+            gameState.Player = _playerFactory.CreatePlayer("Bungus", new GamePosition(5, 5, 1, Layer.Blocking));
 
             var level = _levelFactory.GenerateLevel(1);
             level.AddLevelElement(gameState.Player);
