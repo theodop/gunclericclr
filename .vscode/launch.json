@@ -9,7 +9,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/bin/Debug/net5.0/GunCleric.dll",
+            "program": "${workspaceFolder}/guncleric.console/bin/Debug/net5.0/guncleric.console.dll",
             "args": [],
             "cwd": "${workspaceFolder}",
             "console": "externalTerminal",

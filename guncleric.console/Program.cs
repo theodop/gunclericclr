@@ -18,8 +18,8 @@ namespace GunCleric
     {
         static void Main(string[] args)
         {
-            //var outputter = new ConsoleOutputter();
             var outputter = new TCCOutputter();
+            // var outputter = new BasicOutputter();
             var gameController = new GameFactory().GetGameController(outputter);
             gameController.Start();
         }

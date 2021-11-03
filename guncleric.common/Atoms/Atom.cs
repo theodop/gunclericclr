@@ -65,6 +65,11 @@ namespace GunCleric.Atoms
             return false;
         }
 
+        public void MoveAtom(CardinalDirection direction, GameState state)
+        {
+            MoveAtom(Position.GetRelativePosition(direction), state);
+        }
+
         public void MoveAtom(GamePosition newPosition, GameState state)
         {
             var oldPosition = Position;

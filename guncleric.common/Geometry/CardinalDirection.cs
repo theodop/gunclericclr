@@ -8,6 +8,7 @@ namespace GunCleric.Geometry
 {
     public enum CardinalDirection
     {
+        None,
         TopLeft,
         Top,
         TopRight,

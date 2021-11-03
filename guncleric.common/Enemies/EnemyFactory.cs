@@ -4,6 +4,7 @@ using GunCleric.Damaging;
 using GunCleric.Events;
 using GunCleric.Game;
 using GunCleric.Geometry;
+using GunCleric.Navigation;
 using GunCleric.Random;
 using GunCleric.Scheduler;
 using System;
@@ -31,14 +32,16 @@ namespace GunCleric.Enemies
         {
             var tile = type switch
             {
-                "Mook" => 'm'
+                "Mook" => 'm',
+                "Holy Waste" => 'h'
             };
 
             var enemy = new Atom(type, tile, position);
             enemy.AddComponent(new AgentComponent(enemy));
             var damagedComponent = new DamagedComponent(enemy, _eventBus, _rand);
             enemy.AddComponent(damagedComponent);
-            var navComponent = new RandomNavComponent(enemy, _rand, _scheduleController, 2013, gameState);
+            // var navComponent = new RandomNavComponent(enemy, _rand, _scheduleController, 2013, gameState);
+            var navComponent = new DirectNavComponent(enemy, _scheduleController, 2013);
             enemy.AddComponent(navComponent);
 
             return enemy;

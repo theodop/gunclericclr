@@ -38,5 +38,7 @@ namespace GunCleric.Geometry
 
             return new GamePosition(X + delx, Y + dely, Level, layer ?? Layer);
         }
+
+        public Vector2 DistanceTo(GamePosition that) => new(that.X - X, that.Y - Y);
     }
 }

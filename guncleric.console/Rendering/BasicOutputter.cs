@@ -1,20 +1,15 @@
-﻿using GunCleric.Rendering;
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using GunCleric.Rendering;
 using System.Text;
-using System.Threading.Tasks;
-using TrueColorConsole;
 
 namespace guncleric.console.Rendering
 {
-    public class TCCOutputter : IOutputter
+    public class BasicOutputter : IOutputter
     {
-        readonly StringBuilder _sb = new();
+        private readonly StringBuilder _sb = new();
 
         public void Init()
         {
-            if (!VTConsole.IsEnabled) VTConsole.Enable();
 
             Console.OutputEncoding = Encoding.UTF8;
             try
@@ -33,18 +28,16 @@ namespace guncleric.console.Rendering
 
             for (int y = 0; y < image.Size.Height; y++)
             {
+                ColouredChar[] row = image.GetRow(y);
 
-                var row = image.GetRow(y);
-
-                foreach (var cchar in row)
+                foreach (ColouredChar cchar in row)
                 {
-                    _sb.Append(VTConsole.GetColorForegroundString(cchar.Color.R, cchar.Color.G, cchar.Color.B));
                     _sb.Append(cchar.Char);
                 }
             }
 
             var bytes = Encoding.UTF8.GetBytes(_sb.ToString());
-            VTConsole.WriteFast(bytes);
+            Console.Write(_sb.ToString());
         }
     }
 }
